@@ -1,0 +1,12 @@
+# Ignore object files (intermediate compile steps)
+*.o
+
+# Ignore the final binary
+*.bin
+*.iso
+
+# Ignore the temporary VS Code folder
+.vscode/
+
+# Ignore the cross-compiler build folders (if they are in here)
+build-*/
