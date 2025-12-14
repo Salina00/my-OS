@@ -21,3 +21,30 @@ To build and run this OS, you need the following tools:
 ### 1. Compile the Bootloader
 ```bash
 nasm -f elf32 entry.asm -o entry.o
+<br>
+
+## 🗺️ Development Roadmap
+I am building this OS stage-by-stage to understand low-level computing.
+
+### **Phase 1: The Foundation (Current Stage)**
+- [x] **Bootloader:** Get into Protected Mode (32-bit).
+- [x] **Kernel Entry:** Jump from Assembly to C.
+- [x] **VGA Output:** Print raw characters to video memory (`0xB8000`).
+- [ ] **Terminal Driver:**
+    - Support Newlines (`\n`)
+    - Implement Scrolling (when screen fills up)
+    - Support standard colors
+
+### **Phase 2: The Standard Library (libc)**
+Since there is no Linux/Windows underneath, I cannot use `<stdio.h>`. I must write my own:
+- [ ] Implement `strlen` (String Length)
+- [ ] Implement `memcpy` & `memset` (Memory operations)
+- [ ] Implement `itoa` (Integer to ASCII for printing numbers)
+
+### **Phase 3: Hardware Integration**
+- [ ] **GDT (Global Descriptor Table):** Configure memory segments for security.
+- [ ] **IDT (Interrupt Descriptor Table):** Handle CPU interrupts.
+- [ ] **Keyboard Driver:** Read scancodes from port `0x60` and convert to text.
+
+---
+*Created by **Salina**. Follow my journey in building this system from scratch!*
