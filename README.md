@@ -21,30 +21,51 @@ To build and run this OS, you need the following tools:
 ### 1. Compile the Bootloader
 ```bash
 nasm -f elf32 entry.asm -o entry.o
-<br>
+```
 
+### 2. Compile the kernel
+```bash
+i686-elf-gcc -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+```
+
+### 3. Link the OS
+```bash
+i686-elf-gcc -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib entry.o kernel.o -lgcc
+```
+### 4. Run in QEMU
+```bash
+qemu-system-i386 -kernel myos.bin
+```
 ## 🗺️ Development Roadmap
-I am building this OS stage-by-stage to understand low-level computing.
+- **I am building this OS stage-by-stage to understand low-level computing.**
 
-### **Phase 1: The Foundation (Current Stage)**
-- [x] **Bootloader:** Get into Protected Mode (32-bit).
-- [x] **Kernel Entry:** Jump from Assembly to C.
-- [x] **VGA Output:** Print raw characters to video memory (`0xB8000`).
-- [ ] **Terminal Driver:**
-    - Support Newlines (`\n`)
-    - Implement Scrolling (when screen fills up)
-    - Support standard colors
+- **Phase 1**: The Foundation (Current Stage)
+- **[x] Bootloader**: Get into Protected Mode (32-bit).
 
-### **Phase 2: The Standard Library (libc)**
-Since there is no Linux/Windows underneath, I cannot use `<stdio.h>`. I must write my own:
-- [ ] Implement `strlen` (String Length)
-- [ ] Implement `memcpy` & `memset` (Memory operations)
-- [ ] Implement `itoa` (Integer to ASCII for printing numbers)
+- **[x] Kernel Entry**: Jump from Assembly to C.
 
-### **Phase 3: Hardware Integration**
-- [ ] **GDT (Global Descriptor Table):** Configure memory segments for security.
-- [ ] **IDT (Interrupt Descriptor Table):** Handle CPU interrupts.
-- [ ] **Keyboard Driver:** Read scancodes from port `0x60` and convert to text.
+- **[x] VGA Output**: Print raw characters to video memory (0xB8000).
 
----
-*Created by **Salina**. Follow my journey in building this system from scratch!*
+## [ ] Terminal Driver:
+
+Support Newlines (\n)
+
+Implement Scrolling (when screen fills up)
+
+Support standard colors
+
+- **Phase 2**: The Standard Library (libc)
+Since there is no Linux/Windows underneath, I cannot use <stdio.h>. I must write my own:
+
+[ ] Implement strlen (String Length)
+
+[ ] Implement memcpy & memset (Memory operations)
+
+[ ] Implement itoa (Integer to ASCII for printing numbers)
+
+- **Phase 3**: Hardware Integration
+- **[ ] GDT (Global Descriptor Table)**: Configure memory segments for security.
+
+- **[ ] IDT (Interrupt Descriptor Table)**: Handle CPU interrupts.
+
+- **[ ] Keyboard Driver**: Read scancodes from port 0x60 and convert to text.
