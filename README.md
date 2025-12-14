@@ -1,5 +1,7 @@
 # my-OS
 ![my-OS Running](screenshots/demo.png)
+<br>
+<br>
 **my-OS** is a custom 32-bit operating system kernel written from scratch in C and Assembly. It boots via a Multiboot-compliant bootloader and runs in Protected Mode.
 
 ## 🚀 Features
